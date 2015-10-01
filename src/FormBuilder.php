@@ -1012,21 +1012,19 @@ class FormBuilder
    */
   public function getValueAttribute($name, $value = null)
   {
-      if (is_null($name)) {
-          return $value;
-      }
+    if(is_null($name)) return $value;
 
-      if (!is_null($this->old($name))) {
-          return $this->old($name);
-      }
+    if( ! is_null($this->old($name)))
+    {
+      return $this->old($name);
+    }
 
-      if (!is_null($value)) {
-          return $value;
-      }
+    if($name != '_token' && $name != '_method' && isset($this->model))
+    {
+      return $this->getModelValueAttribute($name);
+    }
 
-      if (isset($this->model)) {
-          return $this->getModelValueAttribute($name);
-      }
+    if( ! is_null($value)) return $value;
   }
 
   /**
